@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+int main() {
+    int T;
+    scanf("%d", &T); // Input the number of test cases
+
+    while (T--) {
+        int X, Y;
+        scanf("%d %d", &X, &Y); // Input daily goal and actual chocolates sold
+        
+        int total_amount = 0;
+        
+        if (Y <= X) {
+            total_amount = Y; // Chef sold exactly his daily goal
+        } else {
+            total_amount = X + 2 * (Y - X); // Chef sold more than his daily goal
+        }
+        
+        printf("%d\n", total_amount);
+    }
+    
+    return 0;
+}
