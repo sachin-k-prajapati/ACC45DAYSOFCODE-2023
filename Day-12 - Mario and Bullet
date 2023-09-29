@@ -1,0 +1,14 @@
+#include <stdio.h>
+int main(void) {
+	int T;
+	scanf("%d", &T);
+	
+	while(T--) {
+	    int X,Y,Z,t,Time;
+	    scanf("%d %d %d", &X, &Y, &Z);
+	    t = Y/X;
+	    Time = Z - t;
+	    (Z<=t)?printf("0\n"):printf("%d\n", Time);
+	}
+	return 0;
+}
