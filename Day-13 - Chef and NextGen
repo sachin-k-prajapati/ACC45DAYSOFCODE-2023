@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main(void) {
+	int T;
+	scanf("%d", &T);
+	
+	while(T--){
+	    int A,B,X,Y,need,have;
+	    scanf("%d %d %d %d", &A, &B, &X, &Y);
+	    need = A*B;
+	    have = X*Y;
+	    if(need <= have){
+	        printf("YES\n");
+	    }
+	    else {
+	        printf("NO\n");
+	    }
+	}
+	return 0;
+}
