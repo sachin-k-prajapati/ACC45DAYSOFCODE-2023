@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <math.h>
+
+int main(void) {
+	int T;
+	scanf("%d", &T);
+	
+	while (T--) {
+	    int Pa, Pb, Qa, Qb, P, Q;
+	    scanf("%d %d %d %d", &Pa, &Pb, &Qa, &Qb);
+	    P = (Pa + Pb) ;
+	    Q = (Qa + Qb) ;
+	    if (P==Q){
+	        printf("TIE\n")
+	    } else if (P > Q ) {
+	        printf("P\n");
+	    } else {
+	        printf("Q\n");
+	    }
+	}
+	return 0;
+}
