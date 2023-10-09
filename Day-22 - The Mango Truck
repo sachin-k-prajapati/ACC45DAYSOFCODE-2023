@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+int main(void) {
+	int T;
+	scanf("%d", &T);
+	
+	while(T--){
+	    int X,Y,Z;
+	    scanf("%d %d %d", &X, &Y, &Z);
+	    printf("%d\n", (Z-Y)/X);
+	}
+	return 0;
+}
