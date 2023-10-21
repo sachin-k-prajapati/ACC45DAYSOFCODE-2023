@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double monthly_investment, annual_return, num_years;
+
+    // Get user input for monthly investment amount in Rupees
+    printf("Welcome to the SIP Calculator!\n");
+    printf("Enter your monthly investment amount (in Rupees): ");
+    scanf("%lf", &monthly_investment);
+
+    // Get user input for expected annual return rate in percentage
+    printf("Enter your expected annual return rate (in percentage): ");
+    scanf("%lf", &annual_return);
+
+    // Get user input for investment duration in years
+    printf("Enter your investment duration (in years): ");
+    scanf("%lf", &num_years);
+
+    // Convert annual return rate from percentage to decimal
+    annual_return = annual_return / 100.0;
+
+    // Calculate the future value of the SIP
+    double future_value = monthly_investment * (pow((1 + annual_return/12), num_years*12) - 1) / (annual_return/12);
+
+    // Print the final future value in Rupees
+    printf("\nAfter %.1lf years, your investment will grow to ₹%.2lf\n", num_years, future_value);
+
+    return 0;
+}
