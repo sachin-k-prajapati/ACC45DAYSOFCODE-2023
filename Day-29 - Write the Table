@@ -1,0 +1,13 @@
+#include <stdio.h>
+int main() {
+  long int number,i;
+  printf( "Enter the Number for Table: ");
+  scanf("%ld", &number);
+  printf( "\nThe table of %ld is: \n", number);
+  i=1;
+  while (i<=10){
+    printf("\n%ld X %ld = %ld\n", number, i, number*i);
+    i++;
+  }
+  return 0;
+}
