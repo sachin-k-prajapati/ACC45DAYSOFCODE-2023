@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SIP Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .containerr {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        #chart-containerr {
+            margin-top: 20px;
+            max-width: 100%;
+            height: 300px; /* Decreased graph height */
+        }
+
+        #details {
+            text-align: center;
+        }
+
+        #details p {
+            font-size: 18px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="containerr">
+        <h1>SIP Calculator</h1>
+        <label for="investment">Monthly Investment (₹)</label>
+        <input type="number" id="investment" placeholder="Enter monthly investment" value="10000">
+
+        <label for "return">Annual Return Rate (%)</label>
+        <input type="number" id="return" placeholder="Enter annual return rate" value="12">
+
+        <label for="duration">Investment Duration (Years)</label>
+        <input type="number" id="duration" placeholder="Enter investment duration" value="10">
+
+        <button onclick="calculateSIP()">Calculate</button>
+
+        <div id="result"></div>
+
+        <div id="details">
+            <p>Invested Amount: <span id="investedAmount"></span></p>
+            <p>Total Earnings: <span id="totalEarnings"></span></p>
+            <p>SIP Value: <span id="sipValue"></span></p>
+        </div>
+
+        <div id="chart-containerr">
+            <canvas id="chart"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById("chart").getContext("2d");
+        const chartData = {
+            labels: [],
+            datasets: [
+                {
+                    label: "Investment Value (in Crores)",
+                    data: [],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)',
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                    ],
+                },
+            ],
+        };
+
+        const chartOptions = {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Months',
+                    },
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Investment Value (in Crores)',
+                    },
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function (value) {
+                            if (value >= 10000000) {
+                                return (value / 10000000).toFixed(2) + ' Crores';
+                            } else if (value >= 100000) {
+                                return (value / 100000).toFixed(2) + ' Lakhs';
+                            }
+                            return value;
+                        },
+                    },
+                },
+                maintainAspectRatio: false,
+                responsive: true,
+            },
+        };
+
+        const myChart = new Chart(ctx, {
+            type: "bar", // Changed chart type to vertical bar
+            data: chartData,
+            options: chartOptions,
+        });
+
+        function formatAmount(amount) {
+            if (amount > 5000000) {
+                return (amount / 10000000).toFixed(2) + " Crores";
+            } else if (amount > 100000) {
+                return (amount / 100000).toFixed(2) + " Lakhs";
+            }
+            return amount;
+        }
+
+        function calculateSIP() {
+            const monthlyInvestment = parseFloat(document.getElementById("investment").value);
+            const annualReturnRate = parseFloat(document.getElementById("return").value) / 100;
+            const investmentDuration = parseFloat(document.getElementById("duration").value);
+
+            const months = investmentDuration * 12;
+            const monthlyRate = annualReturnRate / 12;
+
+            const investmentValues = [];
+            const labels = [];
+
+            let value = 0;
+            let totalInvested = 0;
+            let totalEarnings = 0;
+
+            for (let i = 0; i < months; i++) {
+                value += monthlyInvestment;
+                totalInvested += monthlyInvestment;
+                value = value * (1 + monthlyRate);
+                investmentValues.push(value);
+                labels.push(i + 1);
+            }
+
+            totalEarnings = value - totalInvested;
+
+            chartData.labels = labels;
+            chartData.datasets[0].data = investmentValues;
+            myChart.update();
+
+            const resultElement = document.getElementById("result");
+            resultElement.innerHTML = `After ${investmentDuration} years, your investment will grow to ₹${formatAmount(value)}`;
+
+            const investedAmountElement = document.getElementById("investedAmount");
+            const totalEarningsElement = document.getElementById("totalEarnings");
+            const sipValueElement = document.getElementById("sipValue");
+
+            investedAmountElement.textContent = `₹${formatAmount(totalInvested)}`;
+            totalEarningsElement.textContent = `₹${formatAmount(totalEarnings)}`;
+            sipValueElement.textContent = `₹${formatAmount(value)}`;
+        }
+
+        calculateSIP();
+    </script>
+</body>
+</html>
