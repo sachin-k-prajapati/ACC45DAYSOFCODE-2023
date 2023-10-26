@@ -1,0 +1,12 @@
+#include <stdio.h>
+int main() {
+  long int n,i;
+  printf("Enter a number ");
+  scanf("%ld", &n);
+  for(i=1;i<n;i++) {
+    i++;
+  
+  printf("\nEven number till %ld are:  %ld", n, i);
+  }
+  return 0;
+}
