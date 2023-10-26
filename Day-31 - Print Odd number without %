@@ -1,0 +1,12 @@
+#include <stdio.h>
+int main() {
+  long int n,i;
+  printf("Enter a number ");
+  scanf("%ld", &n);
+  for(i=0;i<n;i++) {
+    i++;
+  
+  printf("\nOdd number till %ld are:  %ld", n, i);
+  }
+  return 0;
+}
