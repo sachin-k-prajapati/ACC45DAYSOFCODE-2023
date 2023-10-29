@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <math.h>
+int main(){
+  int n;
+  printf("Enter the Amount : ");
+  scanf("%d", &n);
+  int R1 = n/500, L1 = n%500, R2 = L1/200, L2 = L1%200, R3 = L2/100, L3 = L2%100, R4 = L3/50, L4 = L3%50, R5 = L4/20, L5 = L4%20, R6 = L5/10, L6 = L5%10, R7 = L6/5, L7 = L6%5, R8 = L7/2, L8 = L7%2, R9 = L8/1;
+  int TOTAL_NOTES = R1+R2+R3+R4+R5+R6+R7+R8+R9;
+  printf("500s Note = %d\n200s Note = %d\n100s = %d\n50s = %d\n20s = %d\n10s = %d\n5s = %d\n2s = %d\n1s = %d\nTOTAL Notes = %d", R1, R2, R3, R4, R5, R6, R7, R8, R9, TOTAL_NOTES);
+  return 0;
+}
