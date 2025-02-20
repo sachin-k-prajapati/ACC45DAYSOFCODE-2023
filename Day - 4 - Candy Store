@@ -6,7 +6,7 @@ int main() {
 
     while (T--) {
         int X, Y;
-        scanf("%d %d", &X, &Y); // Input daily goal and actual chocolates sold
+        scanf("%d %d", &X, &Y); // Input daily goal & actual chocolates sold
         
         int total_amount = 0;
         

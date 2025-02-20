@@ -8,7 +8,7 @@ int main() {
         int X, Y, Z;
         scanf("%d %d %d", &X, &Y, &Z);
 
-        // Calculate the total amount Chef has
+        // Calculate total amount Chef has
         int total_money = X * 5 + Y * 10;
 
         // Calculate the maximum number of chocolates Chef can buy
